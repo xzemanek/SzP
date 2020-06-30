@@ -145,6 +145,42 @@ void lowl_print(LOWL *list)
 	}		
 }
 
+char lowl_delete(LOWL* list)
+{
+	if(list->beg==NULL)
+		return LOWL_OK;
+	
+	if(list->beg->next==NULL)
+	{
+		free(list->cur);
+		list->cur=NULL;
+		list->beg=NULL;
+		return LOWL_OK;
+	} 
+	
+	if(list->cur==list->beg)
+	{
+		lowl_cur_step_right(list);
+		free(list->beg);
+		list->beg=list->cur;
+		return LOWL_OK;	
+	}
+	
+	if(list->cur->next==NULL)
+	{
+		lowl_cur_step_left(list);
+		free(list->cur->next);
+		list->cur->next=NULL;
+		return LOWL_OK;	
+	}
+	
+	OWN *nextNSave=list->cur->next;
+	lowl_cur_step_left(list);
+	free(list->cur->next);
+	list->cur->next=nextNSave;
+	lowl_cur_step_right(list);
+}
+
 int main()
 {
 }
