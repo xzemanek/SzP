@@ -181,6 +181,23 @@ char lowl_delete(LOWL* list)
 	lowl_cur_step_right(list);
 }
 
+void lowl_destroy(LOWL *list)
+{
+	if(list->beg==NULL)
+	{
+		return;
+	}
+	list->cur=list->beg;
+	char step=LOWL_SUCCESS;
+	while(list->cur!=NULL)
+	{
+		lowl_delete(list);
+	}
+	
+	free(list);
+	list=NULL;
+}
+
 int main()
 {
 }
