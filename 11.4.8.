@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+LOWL *lowl_create_empty(void)
+LOWL *lowl_create_random(unsigned int size)
+void lowl_destroy(LOWL *list)
+void lowl_print(LOWL *list)
+char lowl_cur_step_left(LOWL *list)
+char lowl_cur_step_right(LOWL *list)
+OWN *lowl_insert_left(LOWL* list, float val)
+OWN *lowl_insert_right(LOWL* list, float val)
+char lowl_delete(LOWL* list)
+char lowl_interpolate_linear(LOWL *list)
+*/
+
 int main()
 {
 }
