@@ -27,6 +27,23 @@ char lowl_delete(LOWL* list)
 char lowl_interpolate_linear(LOWL *list)
 */
 
+LOWL *lowl_create_empty(void);
+{
+	LOWL *rtrn;
+  
+  rtrn->beg=NULL;
+  rtrn->cur=NULL;
+  
+  rtrn=(LOWL *)malloc(sizeof(LOWL *))
+  if(rtrn==NULL)
+  {
+    return NULL;
+  }
+  
+  return rtrn;
+}
+
+
 int main()
 {
 }
