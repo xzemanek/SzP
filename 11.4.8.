@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define BOUNDARY_REACHED 1;
+#define LOWL_SUCCESS 0;
+#define LOWL_OK 0;
+#define LOWL_FAIL 1;
+
 typedef struct OWN
 {
   float data;
@@ -15,7 +20,6 @@ typedef struct LOWL
 }
 
 /*
-LOWL *lowl_create_empty(void)
 LOWL *lowl_create_random(unsigned int size)
 void lowl_destroy(LOWL *list)
 void lowl_print(LOWL *list)
@@ -41,6 +45,21 @@ LOWL *lowl_create_empty(void);
   }
   
   return rtrn;
+}
+
+char lowl_cur_step_left(LOWL *list)
+{
+	if(list->cur==list->beg)
+	{
+		return BOUNDARY_REACHED;
+	}
+	OWN *leftN=list->beg;
+	while(leftN->next != list->cur)
+	{
+		leftN=leftN->next;
+	}
+	list->cur=leftN;
+	return LOWL_SUCESS;
 }
 
 
