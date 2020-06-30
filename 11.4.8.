@@ -6,6 +6,7 @@
 #define LOWL_SUCCESS 0;
 #define LOWL_OK 0;
 #define LOWL_FAIL 1;
+#define LOWL_PROBLEM 2;
 
 typedef struct OWN
 {
@@ -23,7 +24,6 @@ typedef struct LOWL
 LOWL *lowl_create_random(unsigned int size)
 void lowl_destroy(LOWL *list)
 void lowl_print(LOWL *list)
-char lowl_cur_step_right(LOWL *list)
 OWN *lowl_insert_left(LOWL* list, float val)
 OWN *lowl_insert_right(LOWL* list, float val)
 char lowl_delete(LOWL* list)
@@ -70,6 +70,68 @@ char lowl_cur_step_right(LOWL *list)
 	
 	list->cur->=list->cur->next;
 	return LOWL_SUCCESS;
+}
+
+OWN *lowl_insert_right(LOWL* list, float val)
+{
+	OWN *newN=malloc(sizeof(OWN));
+	if(newN==NULL)
+	{
+        	return NULL;
+	}
+    	newN->data=val;
+    
+	if(list->beg==NULL)
+	{    	
+    		list->cur=newN;
+    		list->beg=newN;
+		list->beg->next=NULL;	
+    		return newN;
+	}
+	
+	if(list->cur->next==NULL)
+	{
+		list->cur->next=newN;
+		newN->next=NULL;
+		return newN;
+	}
+	
+	OWN *rightN=list->cur->next;
+	list->cur->next=newN;
+	list->cur->next->next=rightN;
+	
+	return newN;
+	
+}
+
+OWN *lowl_insert_left(LOWL* list, float val)
+{
+	OWN *newN=malloc(sizeof(OWN));
+	if(newN==NULL)
+	{
+        	return NULL;
+	}
+    	newN->data=val;
+    
+	if(list->beg==NULL)
+	{    	
+    		list->cur=newN;
+    		list->beg=newN;
+		list->beg->next=NULL;	
+    		return newN;
+	}
+	
+	if(list->cur=list->beg)
+	{
+		list->beg=newN;
+		list->beg->next=list->cur;
+		return newN;
+	}
+	
+	lowl_cur_step_left(list);
+	lowl_insert_right(list,val);
+	lowl_cur_step_right(list);
+	lowl_cur_step_right(list);	
 }
 
 
