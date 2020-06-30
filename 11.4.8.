@@ -10,22 +10,20 @@
 
 typedef struct OWN
 {
-  float data;
-  struct OWN *next;
+	float data;
+	struct OWN *next;
 }OWN;
 
 typedef struct LOWL
 {
-  OWN *beg;
-  OWN *cur;
+	OWN *beg;
+	OWN *cur;
 }
 
 /*
 LOWL *lowl_create_random(unsigned int size)
 void lowl_destroy(LOWL *list)
 void lowl_print(LOWL *list)
-OWN *lowl_insert_left(LOWL* list, float val)
-OWN *lowl_insert_right(LOWL* list, float val)
 char lowl_delete(LOWL* list)
 char lowl_interpolate_linear(LOWL *list)
 */
