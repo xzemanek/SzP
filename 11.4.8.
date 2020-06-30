@@ -130,6 +130,20 @@ OWN *lowl_insert_left(LOWL* list, float val)
 	lowl_cur_step_right(list);	
 }
 
+void lowl_print(LOWL *list)
+{	
+	if(list->beg==NULL)
+	{
+		return;
+	}
+		
+	OWN *printer=list->beg;
+	while(printer->next!=NULL)
+	{
+		printf("%f",printer->data);
+		printer=printer->next;	
+	}		
+}
 
 int main()
 {
