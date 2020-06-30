@@ -23,7 +23,6 @@ typedef struct LOWL
 LOWL *lowl_create_random(unsigned int size)
 void lowl_destroy(LOWL *list)
 void lowl_print(LOWL *list)
-char lowl_cur_step_left(LOWL *list)
 char lowl_cur_step_right(LOWL *list)
 OWN *lowl_insert_left(LOWL* list, float val)
 OWN *lowl_insert_right(LOWL* list, float val)
@@ -60,6 +59,17 @@ char lowl_cur_step_left(LOWL *list)
 	}
 	list->cur=leftN;
 	return LOWL_SUCESS;
+}
+
+char lowl_cur_step_right(LOWL *list)
+{
+	if(list->cur->next==NULL)
+	{
+	return BOUNDARY_REACHED;
+	}
+	
+	list->cur->=list->cur->next;
+	return LOWL_SUCCESS;
 }
 
 
