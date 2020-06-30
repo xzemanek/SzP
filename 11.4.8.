@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+typedef struct OWN
+{
+  float data;
+  struct OWN *next;
+}OWN
+
 /*
 LOWL *lowl_create_empty(void)
 LOWL *lowl_create_random(unsigned int size)
