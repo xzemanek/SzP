@@ -6,7 +6,13 @@ typedef struct OWN
 {
   float data;
   struct OWN *next;
-}OWN
+}OWN;
+
+typedef struct LOWL
+{
+  OWN *beg;
+  OWN *cur;
+}
 
 /*
 LOWL *lowl_create_empty(void)
