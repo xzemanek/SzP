@@ -20,22 +20,17 @@ typedef struct LOWL
 	OWN *cur;
 }
 
-/*
-LOWL *lowl_create_random(unsigned int size)
-char lowl_interpolate_linear(LOWL *list)
-*/
-
 LOWL *lowl_create_empty(void);
 {
 	LOWL *rtrn;
-	rtrn->beg=NULL;
-	rtrn->cur=NULL;
   
 	rtrn=(LOWL *)malloc(sizeof(LOWL *))
 	if(rtrn==NULL)
 	{
 		return NULL;
 	}
+	rtrn->beg=NULL;
+	rtrn->cur=NULL;
 	return rtrn;
 }
 
@@ -121,10 +116,15 @@ OWN *lowl_insert_left(LOWL* list, float val)
 		return newN;
 	}
 	
-	lowl_cur_step_left(list);
+	OWN *auxCur=list->cur;
+	list->cur=list->beg;
+
+	while(list->cur->next!=auxCur)
+	{
+		lowl_cur_step_right(list);
+	}
 	lowl_insert_right(list,val);
-	lowl_cur_step_right(list);
-	lowl_cur_step_right(list);	
+	list->cur=auxCur;	
 }
 
 void lowl_print(LOWL *list)
@@ -137,7 +137,7 @@ void lowl_print(LOWL *list)
 	OWN *printer=list->beg;
 	while(printer->next!=NULL)
 	{
-		printf("%f",printer->data);
+		printf("%.2f\n",printer->data);
 		printer=printer->next;	
 	}		
 }
