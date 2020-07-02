@@ -22,9 +22,6 @@ typedef struct LOWL
 
 /*
 LOWL *lowl_create_random(unsigned int size)
-void lowl_destroy(LOWL *list)
-void lowl_print(LOWL *list)
-char lowl_delete(LOWL* list)
 char lowl_interpolate_linear(LOWL *list)
 */
 
@@ -196,6 +193,27 @@ void lowl_destroy(LOWL *list)
 	
 	free(list);
 	list=NULL;
+}
+
+LOWL *lowl_create_random(unsigned int size)
+{
+	LOWL *rtrn ;
+	OWN *newN;
+	unsigned int i;
+	rtrn=lowl_create_empty();
+	if(size != 0)
+	{
+        	for(i=0;i<size;i++)
+        	{
+        		newN = lowl_insert_right(rtrn,(float)rand());
+        		if(newN == NULL)
+			{
+                		return NULL;
+			}
+        }
+	}
+	rtrn->cur=rtrn->beg;
+	return rtrn;			
 }
 
 int main()
