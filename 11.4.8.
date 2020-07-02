@@ -216,6 +216,32 @@ LOWL *lowl_create_random(unsigned int size)
 	return rtrn;			
 }
 
+char lowl_interpolate_linear(LOWL *list)
+{
+	OWN *curSave=list->cur;
+	OWN *NewNErrorCheck;
+	float newV;
+	
+	list->cur=list->beg;
+	if(list->beg->next==NULL)
+	{
+		return LOWL_PROBLEM;
+	}
+	while(list->cur->next!=NULL)
+	{
+		newV=(list->cur->data+list->cur->next->data)/2;
+		NewNErrorCheck=lowl_insert_right(list,newV);
+		if(NewNErrorCheck==NULL)
+		{
+			return LOWL_PROBLEM;
+		}
+		lowl_cur_step_right(list);
+		lowl_cur_step_right(list);
+	}
+	list->cur=curSave;
+	return LOWL_OK;
+}
+
 int main()
 {
 }
