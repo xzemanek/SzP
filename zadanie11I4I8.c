@@ -18,13 +18,13 @@ typedef struct LOWL
 {
 	OWN *beg;
 	OWN *cur;
-}
+}LOWL;
 
 LOWL *lowl_create_empty(void);
 {
 	LOWL *rtrn;
-  
-	rtrn=(LOWL *)malloc(sizeof(LOWL *))
+	
+	rtrn=(LOWL *)malloc(sizeof(LOWL *));
 	if(rtrn==NULL)
 	{
 		return NULL;
@@ -46,35 +46,34 @@ char lowl_cur_step_left(LOWL *list)
 		leftN=leftN->next;
 	}
 	list->cur=leftN;
-	return LOWL_SUCESS;
+	return LOWL_SUCCESS;
 }
 
 char lowl_cur_step_right(LOWL *list)
 {
 	if(list->cur->next==NULL)
 	{
-	return BOUNDARY_REACHED;
+		return BOUNDARY_REACHED;
 	}
-	
-	list->cur->=list->cur->next;
+	list->cur=list->cur->next;
 	return LOWL_SUCCESS;
 }
 
-OWN *lowl_insert_right(LOWL* list, float val)
+OWN *lowl_insert_right(LOWL *list, float val)
 {
 	OWN *newN=malloc(sizeof(OWN));
 	if(newN==NULL)
 	{
-        	return NULL;
+		return NULL;
 	}
-    	newN->data=val;
-    
+	newN->data=val;
+	
 	if(list->beg==NULL)
-	{    	
-    		list->cur=newN;
-    		list->beg=newN;
-		list->beg->next=NULL;	
-    		return newN;
+	{
+		list->cur=newN;
+		list->beg=newN;
+		list->beg->next=NULL;
+		return newN;
 	}
 	
 	if(list->cur->next==NULL)
@@ -86,27 +85,25 @@ OWN *lowl_insert_right(LOWL* list, float val)
 	
 	OWN *rightN=list->cur->next;
 	list->cur->next=newN;
-	list->cur->next->next=rightN;
-	
+	list->cur->next->next=rigthN;
 	return newN;
-	
 }
 
-OWN *lowl_insert_left(LOWL* list, float val)
+OWN *lowl_insert_left(LOWL *list, float val)
 {
 	OWN *newN=malloc(sizeof(OWN));
 	if(newN==NULL)
 	{
-        	return NULL;
+		return NULL;
 	}
-    	newN->data=val;
-    
+	newN->data=val;
+	
 	if(list->beg==NULL)
-	{    	
-    		list->cur=newN;
-    		list->beg=newN;
-		list->beg->next=NULL;	
-    		return newN;
+	{
+		list->cur=newN;
+		list->beg=newN;
+		list->beg->next=NULL;
+		return newN;
 	}
 	
 	if(list->cur=list->beg)
@@ -118,14 +115,20 @@ OWN *lowl_insert_left(LOWL* list, float val)
 	
 	OWN *auxCur=list->cur;
 	list->cur=list->beg;
-
-	while(list->cur->next!=auxCur)
+	
+	while(list->cur->next != auxCur)
 	{
 		lowl_cur_step_right(list);
 	}
 	lowl_insert_right(list,val);
-	list->cur=auxCur;	
+	list->cur=auxCur;
 }
+
+
+
+
+
+
 
 void lowl_print(LOWL *list)
 {	
