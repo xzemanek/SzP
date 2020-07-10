@@ -20,7 +20,7 @@ typedef struct LOWL
 	OWN *cur;
 }LOWL;
 
-LOWL *lowl_create_empty(void);
+LOWL *lowl_create_empty(void)
 {
 	LOWL *rtrn;
 	
@@ -85,7 +85,7 @@ OWN *lowl_insert_right(LOWL *list, float val)
 	
 	OWN *rightN=list->cur->next;
 	list->cur->next=newN;
-	list->cur->next->next=rigthN;
+	list->cur->next->next=rightN;
 	return newN;
 }
 
@@ -242,5 +242,15 @@ char lowl_interpolate_linear(LOWL *list)
 
 int main()
 {
+	LOWL *list=lowl_create_empty();
+	lowl_insert_right(list,1);
+	lowl_cur_step_right(list);
+	lowl_insert_right(list,3);
+	lowl_cur_step_right(list);
+	lowl_insert_right(list,5);
+	lowl_cur_step_right(list);
+	lowl_interpolate_linear(list);
+	lowl_print(list);
+	
 	return 0;
 }
