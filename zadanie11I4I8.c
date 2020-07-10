@@ -124,31 +124,27 @@ OWN *lowl_insert_left(LOWL *list, float val)
 	list->cur=auxCur;
 }
 
-
-
-
-
-
-
 void lowl_print(LOWL *list)
-{	
+{
 	if(list->beg==NULL)
 	{
 		return;
 	}
-		
+	
 	OWN *printer=list->beg;
-	while(printer->next!=NULL)
+	while(printer->next != NULL)
 	{
 		printf("%.2f\n",printer->data);
-		printer=printer->next;	
-	}		
+		printer=printer->next;
+	}
 }
 
-char lowl_delete(LOWL* list)
+char lowl_delete(LOWL *list)
 {
 	if(list->beg==NULL)
+	{
 		return LOWL_OK;
+	}
 	
 	if(list->beg->next==NULL)
 	{
@@ -156,22 +152,22 @@ char lowl_delete(LOWL* list)
 		list->cur=NULL;
 		list->beg=NULL;
 		return LOWL_OK;
-	} 
+	}
 	
 	if(list->cur==list->beg)
 	{
 		lowl_cur_step_right(list);
 		free(list->beg);
 		list->beg=list->cur;
-		return LOWL_OK;	
+		return LOWL_OK;
 	}
 	
 	if(list->cur->next==NULL)
 	{
 		lowl_cur_step_left(list);
 		free(list->cur->next);
-		list->cur->next=NULL;
-		return LOWL_OK;	
+		list->cur->next==NULL;
+		return LOWL_OK;
 	}
 	
 	OWN *nextNSave=list->cur->next;
@@ -189,34 +185,33 @@ void lowl_destroy(LOWL *list)
 	}
 	list->cur=list->beg;
 	char step=LOWL_SUCCESS;
-	while(list->cur!=NULL)
+	while(list->cur != NULL)
 	{
 		lowl_delete(list);
 	}
-	
 	free(list);
 	list=NULL;
 }
 
 LOWL *lowl_create_random(unsigned int size)
 {
-	LOWL *rtrn ;
+	LOWL *rtrn;
 	OWN *newN;
 	unsigned int i;
 	rtrn=lowl_create_empty();
 	if(size != 0)
 	{
-        	for(i=0;i<size;i++)
-        	{
-        		newN = lowl_insert_right(rtrn,(float)rand());
-        		if(newN == NULL)
+		for(i=0; i<size; i++)
+		{
+			newN=lowl_insert_right(rtrn, (float)rand());
+			if(newN==NULL)
 			{
-                		return NULL;
+				return NULL;
 			}
-        }
+		}
 	}
 	rtrn->cur=rtrn->beg;
-	return rtrn;			
+	return rtrn;
 }
 
 char lowl_interpolate_linear(LOWL *list)
@@ -247,4 +242,5 @@ char lowl_interpolate_linear(LOWL *list)
 
 int main()
 {
+	return 0;
 }
